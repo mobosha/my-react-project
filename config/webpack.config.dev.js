@@ -1,5 +1,6 @@
 'use strict';
 
+const autoprefixer = require("autoprefixer");
 const path = require('path');
 const webpack = require('webpack');
 const PnpWebpackPlugin = require('pnp-webpack-plugin');
@@ -222,6 +223,7 @@ module.exports = {
                     },
                   },
                 ],
+                // ['import', { libraryName: 'antd', style: true }]
               ],
               // This is a feature of `babel-loader` for webpack (not Babel itself).
               // It enables caching results in ./node_modules/.cache/babel-loader/
@@ -304,6 +306,27 @@ module.exports = {
               'sass-loader'
             ),
           },
+          {
+            test: /\.less$/,
+            //include: paths.appSrc,
+            use: [{
+                loader: "style-loader" // creates style nodes from JS strings
+            }, {
+                 loader: "css-loader" // translates CSS into CommonJS
+            }, {
+                loader: "less-loader",// compiles Less to CSS
+                options: {
+                    sourceMap: true,
+                    modifyVars: {
+                        'primary-color': '#b81b22',
+                        'link-color': '#b81b22',
+                        'border-radius-base': '2px',
+                    },
+                    javascriptEnabled: true,
+                }
+            }]
+        },
+
           // "file" loader makes sure those assets get served by WebpackDevServer.
           // When you `import` an asset, you get its (virtual) filename.
           // In production, they would get copied to the `build` folder.
