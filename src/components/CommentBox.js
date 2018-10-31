@@ -17,13 +17,17 @@ class CommentBox extends Component {
   }
 
   handleSubmit(event) {
-    console.log(this.state.value);
+    // console.log(this.state.value);
+    this.props.onAddComment(this.state.value)
+    this.setState({
+      value: ''
+    })
     event.preventDefault();  //阻止提交默认行为
   }
 
   render() {
     return (
-      <form onSubmit={this.handleSubmit}>
+      <form>
         <div>
           <label>留言内容</label>
           <input 
@@ -33,7 +37,8 @@ class CommentBox extends Component {
             onChange={this.handleChange}
           /> 
         </div>
-        <button type="primary">留言</button>
+        <button type="button" onClick={this.handleSubmit}>留言</button>
+        <p>已有{this.props.commentsLength}条评论</p>
       </form>
     )
   }

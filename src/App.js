@@ -7,11 +7,32 @@ import './App.less';
 // import LikesButton from './components/LikesButton';
 // import DigitalClock from './components/DigitalClock'
 import CommentBox from './components/CommentBox'
-const tags = ['恐龙','足球小子']
+import CommentList from './components/CommentList'
+// const tags = ['恐龙','足球小子']
 
 class App extends Component {
+  constructor(props){
+    super(props)
+    this.state = {
+      comments: ['this is my first reply']
+    }
+    this.addComment = this.addComment.bind(this)
+    this.delComment = this.delComment.bind(this)
+  }
+
+  addComment(comment) {
+    this.setState({
+      comments: [...this.state.comments, comment]
+    })
+  }
+  delComment(i) {
+    // console.log(i)
+  }
+  
+
   render() {
-    return (
+    const { comments } = this.state
+    return ( 
       <div className="App">
         <header className="App-header">
           <img src={logo} className="App-logo" alt="logo" />
@@ -23,7 +44,14 @@ class App extends Component {
         {/* <NameCard name="king" number={123456789} isHuman tags={tags}></NameCard> */}
         {/* <LikesButton></LikesButton> */}
         {/* <DigitalClock></DigitalClock> */}
-        <CommentBox></CommentBox>
+        <CommentList 
+          comments={comments}
+          onDelComment={this.delComment}
+        />
+        <CommentBox 
+          commentsLength={comments.length} 
+          onAddComment={this.addComment}>
+        </CommentBox>
       </div>
     );
   }
