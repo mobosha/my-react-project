@@ -7,7 +7,7 @@ class CommentList extends Component{
     this.handleClick = this.handleClick.bind(this)
   }
   handleClick(index) {
-    console.log(index)
+    console.log(index.target)
     this.props.onDelComment(index);
   }
 
@@ -21,7 +21,7 @@ class CommentList extends Component{
             comments.map((item, index)=>(
               <li key={index}>
                 {item}
-                <button type="primary" onClick={console.log(this)}>删除</button>
+                <button type="primary" onClick={this.handleClick}>删除</button>
                 {/* <button type="primary" onClick={()=>{this.handleClick(index)}}>删除</button> */}
               </li>
             ))
