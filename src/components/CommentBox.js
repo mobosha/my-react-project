@@ -27,7 +27,7 @@ class CommentBox extends Component {
 
   render() {
     return (
-      <form>
+      <form onSubmit={this.handleSubmit}>
         <div>
           <label>留言内容</label>
           <input 
@@ -37,7 +37,7 @@ class CommentBox extends Component {
             onChange={this.handleChange}
           /> 
         </div>
-        <button type="button" onClick={this.handleSubmit}>留言</button>
+        <button type="submit" >留言</button>
         <p>已有{this.props.commentsLength}条评论</p>
       </form>
     )
